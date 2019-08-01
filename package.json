@@ -1,0 +1,24 @@
+{
+  "name": "aquarius",
+  "version": "1.0.0",
+  "description": "SPA application for searching and sharing funny gifs with your friends",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gif",
+    "cats",
+    "emoji"
+  ],
+  "author": "ZGS",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "materialize-css": "^1.0.0-rc.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-google": "^0.13.0"
+  }
+}
