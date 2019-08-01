@@ -1,4 +1,4 @@
-export const url = 'N0yhGT2cfClBaaYKrJDOozbJ0lKjji1S';
+export const url = 'Ty23jeAto9R1pILtjQYgxOK1r4G96g58';
 export const limit = 36;
 
 export const getTrendingGif = () => fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${url}&limit=10&rating=G`);
