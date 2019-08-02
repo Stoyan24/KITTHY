@@ -54,6 +54,7 @@ export const populateNoDelete = (array) => {
 
 export const populateForFav = (obj) => {
   const populateFn = () => {
+	$('#text-for-favorites').remove();
     $('#outer').append(`<h2 id="text-for-favorites" class="center-align">You don't have a favorite gif<br> try this one</h2>`);
     $(`.fstDivImg, .sndDivImg, .trdDivImg, .fthDivImg`).empty();
     $(`.trdDivImg`).append(`<div class="container"><div id=${obj.id} class="overlay">${heart}</div>

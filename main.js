@@ -123,7 +123,6 @@ import { showDetails } from './views/gifDetailsView.js';
 
   // Displaying favourite Gifs
   favsLoad(async (ev) => {
-    $('#text-for-favorites').remove();
     headerText.text(`Favorites`);
     $('#loadMore').empty();
     // eslint-disable-next-line eqeqeq

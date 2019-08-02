@@ -1,7 +1,7 @@
 export const showDetails = (data) => {
   const $div = $('#popUpInfo');
 
-  if (!data.data.username === '') {
+  if (!data.data.username == '') {
     $div.empty();
     $div.append(`
     <h3 class="right-align remodel">${data.data.title}</h3>
