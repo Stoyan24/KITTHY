@@ -5,6 +5,7 @@ import { keywordHandler } from './common.js';
 import { uploadsView } from './views/uploadsView.js';
 import { showDetails } from './views/gifDetailsView.js';
 
+
 (async () => {
   // Selected jquery elemnts
   const headerText = $('#results-heading');
@@ -78,9 +79,10 @@ import { showDetails } from './views/gifDetailsView.js';
   popUpUpload( async (ev) => {
     $('#text-for-favorites').remove();
     uploadsView();
+    let thisStorege = localStorage.getItem('uploadedGifIds');
     headerText.text(`My uploads`);
     $('#loadMore').empty();
-    const myUploadsResult = await getByIds(uploadedGifs);
+    const myUploadsResult = await getByIds(thisStorege);
     const myUploads = await myUploadsResult.json();
     populate(myUploads.data);
 
@@ -96,7 +98,6 @@ import { showDetails } from './views/gifDetailsView.js';
         localStorage.setItem('uploadedGifIds', uploadedGifIds);
 
         M.toast({ html: 'Upload completed!' });
-        location.reload();
       } catch (error) {
         console.error(error);
       }
@@ -104,8 +105,9 @@ import { showDetails } from './views/gifDetailsView.js';
   });
 
   // Liking gifs and adding them to favourites
-  const favGifs = localStorage.getItem('favGifIds');
+  let favGifs = localStorage.getItem('favGifIds');
   let favGifIds = favGifs ? favGifs.split(',') : [];
+
 
 
   likeEvent((ev) => {
@@ -123,6 +125,8 @@ import { showDetails } from './views/gifDetailsView.js';
 
   // Displaying favourite Gifs
   favsLoad(async (ev) => {
+    let thisStorige = localStorage.getItem('favGifIds');
+    $('#text-for-favorites').remove();
     headerText.text(`Favorites`);
     $('#loadMore').empty();
     // eslint-disable-next-line eqeqeq
@@ -131,7 +135,7 @@ import { showDetails } from './views/gifDetailsView.js';
       const myRandom = await myRandomResult.json();
       populateForFav(myRandom.data);
     } else {
-      const myFavsResult = await getByIds(favGifs);
+      const myFavsResult = await getByIds(thisStorige);
       const myFavs = await myFavsResult.json();
       populate(myFavs.data);
     }
