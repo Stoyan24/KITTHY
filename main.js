@@ -9,6 +9,8 @@ import { showDetails } from './views/gifDetailsView.js';
 (async () => {
   // Selected jquery elemnts
   const headerText = $('#results-heading');
+  const uploadField = $('#upload-form');
+
   // Initial populate
   await populateTrending();
   await getCats();
@@ -79,35 +81,36 @@ import { showDetails } from './views/gifDetailsView.js';
   popUpUpload( async (ev) => {
     $('#text-for-favorites').remove();
     uploadsView();
-    let thisStorege = localStorage.getItem('uploadedGifIds');
+    const thisStorege = localStorage.getItem('uploadedGifIds');
     headerText.text(`My uploads`);
     $('#loadMore').empty();
     const myUploadsResult = await getByIds(thisStorege);
     const myUploads = await myUploadsResult.json();
     populate(myUploads.data);
-
-    uploadGif(async (event) => {
-      try {
-        const file = $('#user-file')[0].files[0];
-        const formData = new FormData();
-        formData.append('file', file);
-        const result = await uploadingGif(formData);
-        const jsonResult = await result.json();
-
-        uploadedGifIds.push(jsonResult.data.id);
-        localStorage.setItem('uploadedGifIds', uploadedGifIds);
-
-        M.toast({ html: 'Upload completed!' });
-      } catch (error) {
-        console.error(error);
-      }
-    });
   });
 
-  // Liking gifs and adding them to favourites
-  let favGifs = localStorage.getItem('favGifIds');
-  let favGifIds = favGifs ? favGifs.split(',') : [];
+  // Upload button
+  uploadGif(async (event) => {
+    try {
+      const file = $('#user-file')[0].files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      const result = await uploadingGif(formData);
+      const jsonResult = await result.json();
 
+      uploadedGifIds.push(jsonResult.data.id);
+      localStorage.setItem('uploadedGifIds', uploadedGifIds);
+
+      M.toast({ html: 'Upload completed!' });
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+
+  // Liking gifs and adding them to favourites
+  const favGifs = localStorage.getItem('favGifIds');
+  let favGifIds = favGifs ? favGifs.split(',') : [];
 
 
   likeEvent((ev) => {
@@ -125,7 +128,8 @@ import { showDetails } from './views/gifDetailsView.js';
 
   // Displaying favourite Gifs
   favsLoad(async (ev) => {
-    let thisStorige = localStorage.getItem('favGifIds');
+    uploadField.empty();
+    const thisStorige = localStorage.getItem('favGifIds');
     $('#text-for-favorites').remove();
     headerText.text(`Favorites`);
     $('#loadMore').empty();
